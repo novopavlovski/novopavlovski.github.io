@@ -768,4 +768,1512 @@
             align-items: flex-start;
             gap: 15px;
             margin-bottom: 15px;
-            text
+            text-align: left;
+        }
+        
+        .step-number {
+            background: var(--yellow);
+            color: var(--black);
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .step-text {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        /* MODALS */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--black);
+            border: 4px solid var(--white);
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+        }
+        
+        .modal-form-group {
+            margin-bottom: 20px;
+        }
+        
+        .modal-label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            color: var(--yellow);
+        }
+        
+        .modal-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--white);
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+        }
+        
+        .modal-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--white);
+            color: var(--black);
+            border: none;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+        
+        .modal-btn:hover {
+            background: var(--green);
+        }
+        
+        /* QR SCANNER MODAL */
+        .qr-scanner-container {
+            background: var(--gray);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        #qr-video {
+            width: 100%;
+            display: block;
+        }
+        
+        /* NOTIFICATIONS */
+        .notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 20px 30px;
+            background: var(--white);
+            color: var(--black);
+            font-weight: 700;
+            transform: translateX(150%);
+            transition: transform 0.3s;
+            z-index: 3000;
+            max-width: 350px;
+        }
+        
+        .notification.active {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            background: var(--red);
+            color: var(--white);
+        }
+        
+        .notification.success {
+            background: var(--green);
+            color: var(--black);
+        }
+        
+        /* MOBILE MENU */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: 2px solid var(--white);
+            color: var(--white);
+            padding: 10px 15px;
+            font-family: 'Space Mono', monospace;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 900px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .welcome-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .welcome-logo {
+                font-size: 3rem;
+                letter-spacing: -4px;
+            }
+        }
+        
+        /* ENCRYPTION BADGE */
+        .encryption-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            background: var(--green);
+            color: var(--black);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        
+        /* SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--black);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--white);
+        }
+        
+        /* VOICE MESSAGE */
+        .voice-message {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .voice-play-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--white);
+            color: var(--black);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        
+        .voice-waveform {
+            flex: 1;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+        
+        .voice-waveform span {
+            width: 3px;
+            background: var(--white);
+            animation: wave 0.5s infinite alternate;
+        }
+        
+        @keyframes wave {
+            from { height: 5px; }
+            to { height: 25px; }
+        }
+        
+        .voice-duration {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        /* EMOJI PICKER */
+        .emoji-picker {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            background: var(--gray);
+            border: 2px solid var(--white);
+            padding: 15px;
+            display: none;
+            flex-wrap: wrap;
+            gap: 10px;
+            max-width: 300px;
+        }
+        
+        .emoji-picker.active {
+            display: flex;
+        }
+        
+        .emoji-btn {
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            transition: transform 0.1s;
+        }
+        
+        .emoji-btn:hover {
+            transform: scale(1.3);
+        }
+        
+        /* CONTEXT MENU */
+        .context-menu {
+            position: fixed;
+            background: var(--gray);
+            border: 2px solid var(--white);
+            min-width: 180px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        .context-menu.active {
+            display: block;
+        }
+        
+        .context-menu-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.1s;
+        }
+        
+        .context-menu-item:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+        
+        /* RECORDING INDICATOR */
+        .recording-indicator {
+            display: none;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background: var(--red);
+            color: var(--white);
+        }
+        
+        .recording-indicator.active {
+            display: flex;
+        }
+        
+        .recording-dot {
+            width: 15px;
+            height: 15px;
+            background: var(--white);
+            border-radius: 50%;
+            animation: blink 0.5s infinite;
+        }
+        
+        .recording-time {
+            font-weight: 700;
+        }
+        
+        .recording-cancel {
+            margin-left: auto;
+            background: none;
+            border: 2px solid var(--white);
+            color: var(--white);
+            padding: 8px 15px;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+        }
+        
+        /* FILE PREVIEW */
+        .file-preview {
+            display: none;
+            padding: 15px;
+            background: var(--gray);
+            border-bottom: 2px solid var(--white);
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .file-preview.active {
+            display: flex;
+        }
+        
+        .file-preview-icon {
+            font-size: 2rem;
+        }
+        
+        .file-preview-info {
+            flex: 1;
+        }
+        
+        .file-preview-name {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .file-preview-size {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .file-preview-remove {
+            background: var(--red);
+            color: var(--white);
+            border: none;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        /* EMPTY STATE */
+        .empty-messages {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.5;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .empty-text {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">CUNQ</div>
+        <button class="mobile-menu-btn" onclick="toggleSidebar()">☰ PEERS</button>
+        <div class="status-indicator">
+            <div class="status-dot" id="connectionStatus"></div>
+            <span id="connectionText">INITIALIZING...</span>
+        </div>
+    </header>
+    
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">Network Control</div>
+                <div class="encryption-badge">
+                    <span>🔒</span>
+                    <span>E2E ENCRYPTED</span>
+                </div>
+            </div>
+            
+            <!-- YOUR ID -->
+            <div class="your-id-section">
+                <div class="your-id-label">Your Peer ID</div>
+                <div class="your-id-display" id="yourId" onclick="copyId()">
+                    Generating...
+                </div>
+            </div>
+            
+            <!-- QR CODE -->
+            <div class="qr-section">
+                <div class="qr-container">
+                    <canvas id="qrcode"></canvas>
+                </div>
+                <div class="qr-label">Scan to Connect</div>
+            </div>
+            
+            <!-- CONNECT -->
+            <div class="connect-section">
+                <div class="connect-label">Connect to Peer</div>
+                <div class="connect-input-group">
+                    <input type="text" class="connect-input" id="peerIdInput" placeholder="Enter Peer ID...">
+                    <button class="connect-btn" onclick="connectToPeer()">→</button>
+                </div>
+            </div>
+            
+            <!-- PEERS LIST -->
+            <div class="peers-section">
+                <div class="peers-header">Active Connections (<span id="peerCount">0</span>)</div>
+                <div id="peersList"></div>
+            </div>
+        </aside>
+        
+        <!-- CHAT AREA -->
+        <main class="chat-area" id="chatArea">
+            <!-- WELCOME SCREEN -->
+            <div class="welcome-screen" id="welcomeScreen">
+                <div class="welcome-logo">CUNQ</div>
+                <div class="welcome-tagline">Peer-to-Peer • Zero Knowledge • No Servers</div>
+                
+                <div class="welcome-features">
+                    <div class="feature-box">
+                        <div class="feature-icon">🔐</div>
+                        <div class="feature-title">E2E Encrypted</div>
+                        <div class="feature-desc">All messages are encrypted end-to-end. Only you and your peer can read them.</div>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon">🌐</div>
+                        <div class="feature-title">True P2P</div>
+                        <div class="feature-desc">Direct connection between devices. No central server stores your data.</div>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon">💾</div>
+                        <div class="feature-title">Local Storage</div>
+                        <div class="feature-desc">Messages stored locally on your device. You control your data.</div>
+                    </div>
+                </div>
+                
+                <div class="welcome-instructions">
+                    <div class="instruction-step">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Share your Peer ID or QR code with someone you want to chat with</div>
+                    </div>
+                    <div class="instruction-step">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Or enter their Peer ID in the connection field</div>
+                    </div>
+                    <div class="instruction-step">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Start chatting with complete privacy</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CHAT VIEW (Hidden initially) -->
+            <div class="chat-view" id="chatView" style="display: none; flex-direction: column; height: 100%;">
+                <div class="chat-header">
+                    <div class="chat-peer-info">
+                        <div class="chat-peer-avatar" id="chatAvatar">?</div>
+                        <div>
+                            <div class="chat-peer-name" id="chatPeerName">Peer</div>
+                            <div class="chat-peer-status" id="chatPeerStatus">Connected</div>
+                        </div>
+                    </div>
+                    <div class="chat-actions">
+                        <button class="chat-action-btn" onclick="openQRModal()" title="Show QR">▣</button>
+                        <button class="chat-action-btn" onclick="clearChat()" title="Clear Chat">🗑</button>
+                        <button class="chat-action-btn" onclick="disconnectPeer()" title="Disconnect">✕</button>
+                    </div>
+                </div>
+                
+                <div class="messages-container" id="messagesContainer">
+                    <div class="empty-messages" id="emptyMessages">
+                        <div class="empty-icon">💬</div>
+                        <div class="empty-text">No messages yet<br>Say hello!</div>
+                    </div>
+                </div>
+                
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                
+                <div class="file-preview" id="filePreview">
+                    <div class="file-preview-icon">📎</div>
+                    <div class="file-preview-info">
+                        <div class="file-preview-name" id="fileName">file.pdf</div>
+                        <div class="file-preview-size" id="fileSize">2.4 MB</div>
+                    </div>
+                    <button class="file-preview-remove" onclick="removeFile()">×</button>
+                </div>
+                
+                <div class="recording-indicator" id="recordingIndicator">
+                    <div class="recording-dot"></div>
+                    <span>Recording</span>
+                    <span class="recording-time" id="recordingTime">0:00</span>
+                    <button class="recording-cancel" onclick="cancelRecording()">Cancel</button>
+                </div>
+                
+                <div class="input-area" id="inputArea">
+                    <div class="input-container">
+                        <div class="input-actions">
+                            <button class="input-action-btn" onclick="toggleEmojiPicker()" title="Emoji">😀</button>
+                            <input type="file" id="fileInput" style="display: none" onchange="handleFile(event)">
+                            <button class="input-action-btn" onclick="document.getElementById('fileInput').click()" title="Attach File">📎</button>
+                            <button class="input-action-btn" id="voiceBtn" onmousedown="startRecording()" onmouseup="stopRecording()" title="Voice Message">🎤</button>
+                        </div>
+                        <textarea class="message-input" id="messageInput" placeholder="Type your message..." rows="1" onkeydown="handleKeyDown(event)" oninput="handleInput()"></textarea>
+                        <button class="send-btn" onclick="sendMessage()">↑</button>
+                    </div>
+                    <div class="emoji-picker" id="emojiPicker"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- NOTIFICATION -->
+    <div class="notification" id="notification"></div>
+    
+    <!-- CONTEXT MENU -->
+    <div class="context-menu" id="contextMenu">
+        <div class="context-menu-item" onclick="copyMessage()">Copy</div>
+        <div class="context-menu-item" onclick="deleteMessage()">Delete</div>
+        <div class="context-menu-item" onclick="replyMessage()">Reply</div>
+    </div>
+    
+    <!-- QR MODAL -->
+    <div class="modal" id="qrModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('qrModal')">×</button>
+            <div class="modal-title">Your QR Code</div>
+            <div style="text-align: center;">
+                <div class="qr-container" style="display: inline-block;">
+                    <canvas id="modalQrcode"></canvas>
+                </div>
+                <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.7;">
+                    Let others scan this code to connect to you
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- NAME MODAL -->
+    <div class="modal" id="nameModal">
+        <div class="modal-content">
+            <div class="modal-title">Enter Your Name</div>
+            <div class="modal-form-group">
+                <label class="modal-label">Display Name</label>
+                <input type="text" class="modal-input" id="displayNameInput" placeholder="Anonymous" maxlength="20">
+            </div>
+            <button class="modal-btn" onclick="saveName()">Start Chatting</button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // CUNQ - P2P Chat Application
+        // ============================================
+        
+        // Global State
+        let peer = null;
+        let connections = {};
+        let currentPeerId = null;
+        let messages = {};
+        let displayName = localStorage.getItem('cunq_name') || '';
+        let selectedFile = null;
+        let mediaRecorder = null;
+        let audioChunks = [];
+        let recordingStartTime = null;
+        let recordingInterval = null;
+        let typingTimeout = null;
+        let contextMessageId = null;
+        
+        // Emoji list
+        const emojis = ['😀', '😂', '🥰', '😎', '🤔', '😢', '😡', '👍', '👎', '❤️', '🔥', '⭐', '🎉', '💀', '👀', '🙏', '💪', '🤝', '✌️', '🤙'];
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initEmojis();
+            loadStoredMessages();
+            
+            if (!displayName) {
+                document.getElementById('nameModal').classList.add('active');
+            } else {
+                initPeer();
+            }
+            
+            // Close context menu on click
+            document.addEventListener('click', () => {
+                document.getElementById('contextMenu').classList.remove('active');
+            });
+        });
+        
+        // Initialize PeerJS
+        function initPeer() {
+            // Generate a readable ID
+            const randomId = 'CUNQ-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+            
+            peer = new Peer(randomId, {
+                debug: 1
+            });
+            
+            peer.on('open', (id) => {
+                console.log('My peer ID is: ' + id);
+                document.getElementById('yourId').textContent = id;
+                document.getElementById('connectionStatus').classList.add('connected');
+                document.getElementById('connectionText').textContent = 'ONLINE';
+                
+                // Generate QR codes
+                generateQR('qrcode', id, 150);
+                generateQR('modalQrcode', id, 250);
+                
+                showNotification('Connected to network', 'success');
+            });
+            
+            peer.on('connection', (conn) => {
+                handleConnection(conn);
+            });
+            
+            peer.on('error', (err) => {
+                console.error('Peer error:', err);
+                if (err.type === 'peer-unavailable') {
+                    showNotification('Peer not found or offline', 'error');
+                } else {
+                    showNotification('Connection error: ' + err.type, 'error');
+                }
+            });
+            
+            peer.on('disconnected', () => {
+                document.getElementById('connectionStatus').classList.remove('connected');
+                document.getElementById('connectionText').textContent = 'OFFLINE';
+            });
+        }
+        
+        // Generate QR Code
+        function generateQR(elementId, text, size) {
+            const canvas = document.getElementById(elementId);
+            QRCode.toCanvas(canvas, text, {
+                width: size,
+                margin: 1,
+                color: {
+                    dark: '#000000',
+                    light: '#ffffff'
+                }
+            });
+        }
+        
+        // Connect to a peer
+        function connectToPeer() {
+            const peerId = document.getElementById('peerIdInput').value.trim();
+            if (!peerId) {
+                showNotification('Please enter a Peer ID', 'error');
+                return;
+            }
+            
+            if (peerId === peer.id) {
+                showNotification('Cannot connect to yourself', 'error');
+                return;
+            }
+            
+            if (connections[peerId]) {
+                showNotification('Already connected to this peer', 'error');
+                return;
+            }
+            
+            const conn = peer.connect(peerId, {
+                reliable: true,
+                metadata: { name: displayName }
+            });
+            
+            handleConnection(conn);
+            document.getElementById('peerIdInput').value = '';
+        }
+        
+        // Handle connection
+        function handleConnection(conn) {
+            conn.on('open', () => {
+                console.log('Connected to: ' + conn.peer);
+                connections[conn.peer] = {
+                    conn: conn,
+                    name: conn.metadata?.name || 'Anonymous',
+                    online: true
+                };
+                
+                // Send our name
+                conn.send({
+                    type: 'handshake',
+                    name: displayName
+                });
+                
+                updatePeersList();
+                showNotification(`Connected to ${connections[conn.peer].name}`, 'success');
+                
+                // Initialize messages array if needed
+                if (!messages[conn.peer]) {
+                    messages[conn.peer] = [];
+                }
+            });
+            
+            conn.on('data', (data) => {
+                handleMessage(conn.peer, data);
+            });
+            
+            conn.on('close', () => {
+                if (connections[conn.peer]) {
+                    showNotification(`${connections[conn.peer].name} disconnected`, 'error');
+                    delete connections[conn.peer];
+                    updatePeersList();
+                    
+                    if (currentPeerId === conn.peer) {
+                        showWelcomeScreen();
+                    }
+                }
+            });
+            
+            conn.on('error', (err) => {
+                console.error('Connection error:', err);
+                showNotification('Connection error', 'error');
+            });
+        }
+        
+        // Handle incoming messages
+        function handleMessage(peerId, data) {
+            switch (data.type) {
+                case 'handshake':
+                    if (connections[peerId]) {
+                        connections[peerId].name = data.name || 'Anonymous';
+                        updatePeersList();
+                    }
+                    break;
+                    
+                case 'message':
+                    const msg = {
+                        id: data.id || Date.now(),
+                        text: data.text,
+                        sent: false,
+                        timestamp: data.timestamp || Date.now(),
+                        status: 'delivered'
+                    };
+                    
+                    if (!messages[peerId]) messages[peerId] = [];
+                    messages[peerId].push(msg);
+                    saveMessages();
+                    
+                    // Send delivery receipt
+                    connections[peerId].conn.send({
+                        type: 'receipt',
+                        messageId: msg.id,
+                        status: 'delivered'
+                    });
+                    
+                    if (currentPeerId === peerId) {
+                        addMessageToUI(msg);
+                        // Mark as read
+                        setTimeout(() => {
+                            connections[peerId].conn.send({
+                                type: 'receipt',
+                                messageId: msg.id,
+                                status: 'read'
+                            });
+                        }, 1000);
+                    } else {
+                        // Show notification for other chats
+                        updatePeersList();
+                        showNotification(`New message from ${connections[peerId]?.name || peerId}`, 'success');
+                    }
+                    break;
+                    
+                case 'file':
+                    const fileMsg = {
+                        id: data.id || Date.now(),
+                        file: data.file,
+                        fileName: data.fileName,
+                        fileType: data.fileType,
+                        fileSize: data.fileSize,
+                        sent: false,
+                        timestamp: data.timestamp || Date.now(),
+                        status: 'delivered'
+                    };
+                    
+                    if (!messages[peerId]) messages[peerId] = [];
+                    messages[peerId].push(fileMsg);
+                    saveMessages();
+                    
+                    if (currentPeerId === peerId) {
+                        addFileMessageToUI(fileMsg);
+                    }
+                    break;
+                    
+                case 'voice':
+                    const voiceMsg = {
+                        id: data.id || Date.now(),
+                        audio: data.audio,
+                        duration: data.duration,
+                        sent: false,
+                        timestamp: data.timestamp || Date.now(),
+                        status: 'delivered'
+                    };
+                    
+                    if (!messages[peerId]) messages[peerId] = [];
+                    messages[peerId].push(voiceMsg);
+                    saveMessages();
+                    
+                    if (currentPeerId === peerId) {
+                        addVoiceMessageToUI(voiceMsg);
+                    }
+                    break;
+                    
+                case 'typing':
+                    if (currentPeerId === peerId) {
+                        showTypingIndicator(data.isTyping);
+                    }
+                    break;
+                    
+                case 'receipt':
+                    updateMessageStatus(peerId, data.messageId, data.status);
+                    break;
+            }
+        }
+        
+        // Update peers list
+        function updatePeersList() {
+            const list = document.getElementById('peersList');
+            const count = Object.keys(connections).length;
+            document.getElementById('peerCount').textContent = count;
+            
+            if (count === 0) {
+                list.innerHTML = '<div style="padding: 30px; text-align: center; opacity: 0.5;">No connections yet</div>';
+                return;
+            }
+            
+            list.innerHTML = '';
+            for (const [peerId, data] of Object.entries(connections)) {
+                const unread = messages[peerId]?.filter(m => !m.sent && m.status !== 'read').length || 0;
+                const lastMsg = messages[peerId]?.[messages[peerId].length - 1];
+                
+                const item = document.createElement('div');
+                item.className = 'peer-item' + (currentPeerId === peerId ? ' active' : '');
+                item.innerHTML = `
+                    <div class="peer-name">
+                        <span class="peer-status"></span>
+                        ${escapeHtml(data.name)}
+                    </div>
+                    <div class="peer-id">${peerId}</div>
+                    ${lastMsg ? `<div class="peer-last-msg">${lastMsg.text ? escapeHtml(lastMsg.text) : (lastMsg.audio ? '🎤 Voice message' : '📎 File')}</div>` : ''}
+                    ${unread > 0 ? `<div class="peer-unread">${unread}</div>` : ''}
+                `;
+                item.onclick = () => openChat(peerId);
+                list.appendChild(item);
+            }
+        }
+        
+        // Open chat with peer
+        function openChat(peerId) {
+            currentPeerId = peerId;
+            const peerData = connections[peerId];
+            
+            document.getElementById('welcomeScreen').style.display = 'none';
+            document.getElementById('chatView').style.display = 'flex';
+            
+            document.getElementById('chatPeerName').textContent = peerData.name;
+            document.getElementById('chatAvatar').textContent = peerData.name.charAt(0).toUpperCase();
+            
+            // Load messages
+            loadMessages(peerId);
+            updatePeersList();
+            
+            // Close mobile sidebar
+            document.getElementById('sidebar').classList.remove('active');
+        }
+        
+        // Load messages for peer
+        function loadMessages(peerId) {
+            const container = document.getElementById('messagesContainer');
+            const emptyState = document.getElementById('emptyMessages');
+            
+            container.innerHTML = '';
+            container.appendChild(emptyState);
+            
+            const peerMessages = messages[peerId] || [];
+            
+            if (peerMessages.length === 0) {
+                emptyState.style.display = 'flex';
+            } else {
+                emptyState.style.display = 'none';
+                
+                peerMessages.forEach(msg => {
+                    if (msg.audio) {
+                        addVoiceMessageToUI(msg);
+                    } else if (msg.file) {
+                        addFileMessageToUI(msg);
+                    } else {
+                        addMessageToUI(msg);
+                    }
+                });
+            }
+            
+            scrollToBottom();
+        }
+        
+        // Send message
+        function sendMessage() {
+            if (!currentPeerId || !connections[currentPeerId]) {
+                showNotification('Not connected to peer', 'error');
+                return;
+            }
+            
+            const input = document.getElementById('messageInput');
+            const text = input.value.trim();
+            
+            if (!text && !selectedFile) return;
+            
+            if (selectedFile) {
+                sendFile();
+                return;
+            }
+            
+            const msg = {
+                id: Date.now(),
+                text: text,
+                sent: true,
+                timestamp: Date.now(),
+                status: 'sent'
+            };
+            
+            // Send to peer
+            connections[currentPeerId].conn.send({
+                type: 'message',
+                id: msg.id,
+                text: msg.text,
+                timestamp: msg.timestamp
+            });
+            
+            // Store locally
+            if (!messages[currentPeerId]) messages[currentPeerId] = [];
+            messages[currentPeerId].push(msg);
+            saveMessages();
+            
+            // Update UI
+            addMessageToUI(msg);
+            input.value = '';
+            input.style.height = 'auto';
+            
+            // Clear typing
+            sendTypingIndicator(false);
+        }
+        
+        // Add message to UI
+        function addMessageToUI(msg) {
+            const container = document.getElementById('messagesContainer');
+            document.getElementById('emptyMessages').style.display = 'none';
+            
+            const msgEl = document.createElement('div');
+            msgEl.className = 'message ' + (msg.sent ? 'sent' : 'received');
+            msgEl.dataset.id = msg.id;
+            msgEl.oncontextmenu = (e) => showContextMenu(e, msg.id);
+            
+            const time = new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            msgEl.innerHTML = `
+                <div class="message-content">
+                    <div class="message-text">${formatMessage(msg.text)}</div>
+                    <div class="message-meta">
+                        <span>${time}</span>
+                        ${msg.sent ? `<span class="message-status ${msg.status}"></span>` : ''}
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(msgEl);
+            scrollToBottom();
+        }
+        
+        // Add file message to UI
+        function addFileMessageToUI(msg) {
+            const container = document.getElementById('messagesContainer');
+            document.getElementById('emptyMessages').style.display = 'none';
+            
+            const msgEl = document.createElement('div');
+            msgEl.className = 'message ' + (msg.sent ? 'sent' : 'received');
+            msgEl.dataset.id = msg.id;
+            
+            const time = new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const isImage = msg.fileType?.startsWith('image/');
+            
+            msgEl.innerHTML = `
+                <div class="message-content">
+                    ${isImage ? `<img src="${msg.file}" class="message-image" alt="${msg.fileName}">` : `
+                    <div class="message-file" onclick="downloadFile('${msg.file}', '${msg.fileName}')">
+                        <span style="font-size: 1.5rem;">📄</span>
+                        <div>
+                            <div style="font-weight: 700;">${escapeHtml(msg.fileName)}</div>
+                            <div style="font-size: 0.8rem; opacity: 0.7;">${formatFileSize(msg.fileSize)}</div>
+                        </div>
+                    </div>
+                    `}
+                    <div class="message-meta">
+                        <span>${time}</span>
+                        ${msg.sent ? `<span class="message-status ${msg.status}"></span>` : ''}
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(msgEl);
+            scrollToBottom();
+        }
+        
+        // Add voice message to UI
+        function addVoiceMessageToUI(msg) {
+            const container = document.getElementById('messagesContainer');
+            document.getElementById('emptyMessages').style.display = 'none';
+            
+            const msgEl = document.createElement('div');
+            msgEl.className = 'message ' + (msg.sent ? 'sent' : 'received');
+            msgEl.dataset.id = msg.id;
+            
+            const time = new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            // Generate random waveform
+            const waveform = Array(20).fill(0).map(() => 
+                `<span style="height: ${Math.random() * 20 + 5}px; animation: none;"></span>`
+            ).join('');
+            
+            msgEl.innerHTML = `
+                <div class="message-content">
+                    <div class="voice-message">
+                        <button class="voice-play-btn" onclick="playVoice('${msg.id}', '${msg.audio}')">▶</button>
+                        <div class="voice-waveform">${waveform}</div>
+                        <span class="voice-duration">${msg.duration || '0:00'}</span>
+                    </div>
+                    <audio id="audio-${msg.id}" src="${msg.audio}" style="display: none;"></audio>
+                    <div class="message-meta">
+                        <span>${time}</span>
+                        ${msg.sent ? `<span class="message-status ${msg.status}"></span>` : ''}
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(msgEl);
+            scrollToBottom();
+        }
+        
+        // Play voice message
+        function playVoice(msgId, audioData) {
+            const audio = document.getElementById('audio-' + msgId);
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        }
+        
+        // Handle file selection
+        function handleFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            if (file.size > 10 * 1024 * 1024) {
+                showNotification('File too large (max 10MB)', 'error');
+                return;
+            }
+            
+            selectedFile = file;
+            
+            document.getElementById('fileName').textContent = file.name;
+            document.getElementById('fileSize').textContent = formatFileSize(file.size);
+            document.getElementById('filePreview').classList.add('active');
+        }
+        
+        // Remove selected file
+        function removeFile() {
+            selectedFile = null;
+            document.getElementById('filePreview').classList.remove('active');
+            document.getElementById('fileInput').value = '';
+        }
+        
+        // Send file
+        function sendFile() {
+            if (!selectedFile || !currentPeerId) return;
+            
+            const reader = new FileReader();
+            reader.onload = () => {
+                const msg = {
+                    id: Date.now(),
+                    file: reader.result,
+                    fileName: selectedFile.name,
+                    fileType: selectedFile.type,
+                    fileSize: selectedFile.size,
+                    sent: true,
+                    timestamp: Date.now(),
+                    status: 'sent'
+                };
+                
+                connections[currentPeerId].conn.send({
+                    type: 'file',
+                    id: msg.id,
+                    file: msg.file,
+                    fileName: msg.fileName,
+                    fileType: msg.fileType,
+                    fileSize: msg.fileSize,
+                    timestamp: msg.timestamp
+                });
+                
+                if (!messages[currentPeerId]) messages[currentPeerId] = [];
+                messages[currentPeerId].push(msg);
+                saveMessages();
+                
+                addFileMessageToUI(msg);
+                removeFile();
+            };
+            reader.readAsDataURL(selectedFile);
+        }
+        
+        // Download file
+        function downloadFile(dataUrl, fileName) {
+            const link = document.createElement('a');
+            link.href = dataUrl;
+            link.download = fileName;
+            link.click();
+        }
+        
+        // Voice recording
+        function startRecording() {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+                    
+                    mediaRecorder.ondataavailable = e => {
+                        audioChunks.push(e.data);
+                    };
+                    
+                    mediaRecorder.onstop = () => {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                        const reader = new FileReader();
+                        reader.onload = () => {
+                            sendVoiceMessage(reader.result);
+                        };
+                        reader.readAsDataURL(audioBlob);
+                        
+                        stream.getTracks().forEach(track => track.stop());
+                    };
+                    
+                    mediaRecorder.start();
+                    recordingStartTime = Date.now();
+                    
+                    document.getElementById('recordingIndicator').classList.add('active');
+                    document.getElementById('inputArea').style.display = 'none';
+                    
+                    recordingInterval = setInterval(updateRecordingTime, 1000);
+                })
+                .catch(err => {
+                    console.error('Microphone access denied:', err);
+                    showNotification('Microphone access denied', 'error');
+                });
+        }
+        
+        function stopRecording() {
+            if (mediaRecorder && mediaRecorder.state === 'recording') {
+                mediaRecorder.stop();
+                clearInterval(recordingInterval);
+                document.getElementById('recordingIndicator').classList.remove('active');
+                document.getElementById('inputArea').style.display = 'block';
+            }
+        }
+        
+        function cancelRecording() {
+            if (mediaRecorder) {
+                mediaRecorder.ondataavailable = null;
+                mediaRecorder.onstop = null;
+                if (mediaRecorder.state === 'recording') {
+                    mediaRecorder.stop();
+                }
+            }
+            clearInterval(recordingInterval);
+            document.getElementById('recordingIndicator').classList.remove('active');
+            document.getElementById('inputArea').style.display = 'block';
+        }
+        
+        function updateRecordingTime() {
+            const elapsed = Math.floor((Date.now() - recordingStartTime) / 1000);
+            const mins = Math.floor(elapsed / 60);
+            const secs = elapsed % 60;
+            document.getElementById('recordingTime').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        function sendVoiceMessage(audioData) {
+            if (!currentPeerId) return;
+            
+            const elapsed = Math.floor((Date.now() - recordingStartTime) / 1000);
+            const duration = `${Math.floor(elapsed / 60)}:${(elapsed % 60).toString().padStart(2, '0')}`;
+            
+            const msg = {
+                id: Date.now(),
+                audio: audioData,
+                duration: duration,
+                sent: true,
+                timestamp: Date.now(),
+                status: 'sent'
+            };
+            
+            connections[currentPeerId].conn.send({
+                type: 'voice',
+                id: msg.id,
+                audio: msg.audio,
+                duration: msg.duration,
+                timestamp: msg.timestamp
+            });
+            
+            if (!messages[currentPeerId]) messages[currentPeerId] = [];
+            messages[currentPeerId].push(msg);
+            saveMessages();
+            
+            addVoiceMessageToUI(msg);
+        }
+        
+        // Typing indicator
+        function handleInput() {
+            sendTypingIndicator(true);
+            
+            clearTimeout(typingTimeout);
+            typingTimeout = setTimeout(() => {
+                sendTypingIndicator(false);
+            }, 2000);
+            
+            // Auto-resize textarea
+            const textarea = document.getElementById('messageInput');
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 150) + 'px';
+        }
+        
+        function sendTypingIndicator(isTyping) {
+            if (currentPeerId && connections[currentPeerId]) {
+                connections[currentPeerId].conn.send({
+                    type: 'typing',
+                    isTyping: isTyping
+                });
+            }
+        }
+        
+        function showTypingIndicator(show) {
+            document.getElementById('typingIndicator').classList.toggle('active', show);
+            if (show) scrollToBottom();
+        }
+        
+        // Update message status
+        function updateMessageStatus(peerId, messageId, status) {
+            const peerMessages = messages[peerId];
+            if (!peerMessages) return;
+            
+            const msg = peerMessages.find(m => m.id === messageId);
+            if (msg) {
+                msg.status = status;
+                saveMessages();
+                
+                if (currentPeerId === peerId) {
+                    const msgEl = document.querySelector(`.message[data-id="${messageId}"] .message-status`);
+                    if (msgEl) {
+                        msgEl.className = 'message-status ' + status;
+                    }
+                }
+            }
+        }
+        
+        // Emoji picker
+        function initEmojis() {
+            const picker = document.getElementById('emojiPicker');
+            emojis.forEach(emoji => {
+                const btn = document.createElement('button');
+                btn.className = 'emoji-btn';
+                btn.textContent = emoji;
+                btn.onclick = () => insertEmoji(emoji);
+                picker.appendChild(btn);
+            });
+        }
+        
+        function toggleEmojiPicker() {
+            document.getElementById('emojiPicker').classList.toggle('active');
+        }
+        
+        function insertEmoji(emoji) {
+            const input = document.getElementById('messageInput');
+            input.value += emoji;
+            input.focus();
+            document.getElementById('emojiPicker').classList.remove('active');
+        }
+        
+        // Context menu
+        function showContextMenu(e, msgId) {
+            e.preventDefault();
+            contextMessageId = msgId;
+            
+            const menu = document.getElementById('contextMenu');
+            menu.style.left = e.pageX + 'px';
+            menu.style.top = e.pageY + 'px';
+            menu.classList.add('active');
+        }
+        
+        function copyMessage() {
+            const msg = messages[currentPeerId]?.find(m => m.id === contextMessageId);
+            if (msg?.text) {
+                navigator.clipboard.writeText(msg.text);
+                showNotification('Copied to clipboard', 'success');
+            }
+        }
+        
+        function deleteMessage() {
+            if (!currentPeerId) return;
+            
+            const index = messages[currentPeerId]?.findIndex(m => m.id === contextMessageId);
+            if (index > -1) {
+                messages[currentPeerId].splice(index, 1);
+                saveMessages();
+                loadMessages(currentPeerId);
+                showNotification('Message deleted', 'success');
+            }
+        }
+        
+        function replyMessage() {
+            const msg = messages[currentPeerId]?.find(m => m.id === contextMessageId);
+            if (msg?.text) {
+                const input = document.getElementById('messageInput');
+                input.value = `> ${msg.text.substring(0, 50)}${msg.text.length > 50 ? '...' : ''}\n\n`;
+                input.focus();
+            }
+        }
+        
+        // Clear chat
+        function clearChat() {
+            if (!currentPeerId) return;
+            
+            if (confirm('Delete all messages with this peer?')) {
+                messages[currentPeerId] = [];
+                saveMessages();
+                loadMessages(currentPeerId);
+                showNotification('Chat cleared', 'success');
+            }
+        }
+        
+        // Disconnect peer
+        function disconnectPeer() {
+            if (!currentPeerId || !connections[currentPeerId]) return;
+            
+            if (confirm('Disconnect from this peer?')) {
+                connections[currentPeerId].conn.close();
+                delete connections[currentPeerId];
+                updatePeersList();
+                showWelcomeScreen();
+                showNotification('Disconnected', 'success');
+            }
+        }
+        
+        // Show welcome screen
+        function showWelcomeScreen() {
+            currentPeerId = null;
+            document.getElementById('welcomeScreen').style.display = 'flex';
+            document.getElementById('chatView').style.display = 'none';
+        }
+        
+        // Handle key down
+        function handleKeyDown(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        }
+        
+        // Copy ID
+        function copyId() {
+            const id = document.getElementById('yourId').textContent;
+            navigator.clipboard.writeText(id);
+            showNotification('Peer ID copied', 'success');
+        }
+        
+        // Save/Load messages
+        function saveMessages() {
+            localStorage.setItem('cunq_messages', JSON.stringify(messages));
+        }
+        
+        function loadStoredMessages() {
+            const stored = localStorage.getItem('cunq_messages');
+            if (stored) {
+                messages = JSON.parse(stored);
+            }
+        }
+        
+        // Save name
+        function saveName() {
+            const name = document.getElementById('displayNameInput').value.trim() || 'Anonymous';
+            displayName = name;
+            localStorage.setItem('cunq_name', name);
+            document.getElementById('nameModal').classList.remove('active');
+            initPeer();
+        }
+        
+        // Modal functions
+        function openQRModal() {
+            document.getElementById('qrModal').classList.add('active');
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+        
+        // Toggle sidebar (mobile)
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+        
+        // Scroll to bottom
+        function scrollToBottom() {
+            const container = document.getElementById('messagesContainer');
+            container.scrollTop = container.scrollHeight;
+        }
+        
+        // Show notification
+        function showNotification(text, type = '') {
+            const notif = document.getElementById('notification');
+            notif.textContent = text;
+            notif.className = 'notification active ' + type;
+            
+            setTimeout(() => {
+                notif.classList.remove('active');
+            }, 3000);
+        }
+        
+        // Utility functions
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function formatMessage(text) {
+            // Escape HTML first
+            text = escapeHtml(text);
+            
+            // Convert URLs to links
+            text = text.replace(
+                /(https?:\/\/[^\s]+)/g,
+                '<a href="$1" target="_blank" style="color: inherit; text-decoration: underline;">$1</a>'
+            );
+            
+            // Convert newlines to <br>
+            text = text.replace(/\n/g, '<br>');
+            
+            return text;
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+    </script>
+</body>
+</html>
