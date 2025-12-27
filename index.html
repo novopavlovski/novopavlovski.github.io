@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUNQ — P2P ENCRYPTED CHAT</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.1/dist/peerjs.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --red: #ff0000;
+            --yellow: #ffff00;
+            --green: #00ff00;
+            --blue: #0066ff;
+            --gray: #1a1a1a;
+            --dark-gray: #0d0d0d;
+        }
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--black);
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* BRUTALIST ELEMENTS */
+        .brutalist-border {
+            border: 4px solid var(--white);
+        }
+        
+        .brutalist-shadow {
+            box-shadow: 8px 8px 0 var(--white);
+        }
+        
+        .glitch {
+            animation: glitch 0.3s infinite;
+        }
+        
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* HEADER */
+        .header {
+            padding: 20px;
+            border-bottom: 4px solid var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--black);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            font-family: 'Inter', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -3px;
+            position: relative;
+        }
+        
+        .logo::before {
+            content: 'CUNQ';
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            color: var(--red);
+            z-index: -1;
+        }
+        
+        .logo::after {
+            content: 'CUNQ';
+            position: absolute;
+            left: -2px;
+            top: -2px;
+            color: var(--blue);
+            z-index: -1;
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+        
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--red);
+            animation: blink 1s infinite;
+        }
+        
+        .status-dot.connected {
+            background: var(--green);
+            animation: none;
+        }
+        
+        /* MAIN CONTAINER */
+        .container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            height: calc(100vh - 85px);
+        }
+        
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+            
+            .sidebar.active {
+                display: block;
+                position: fixed;
+                top: 85px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 999;
+            }
+        }
+        
+        /* SIDEBAR */
+        .sidebar {
+            border-right: 4px solid var(--white);
+            background: var(--dark-gray);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 2px solid var(--white);
+            background: var(--gray);
+        }
+        
+        .sidebar-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sidebar-title::before {
+            content: '//';
+            color: var(--yellow);
+        }
+        
+        /* YOUR ID SECTION */
+        .your-id-section {
+            padding: 20px;
+            border-bottom: 2px solid var(--white);
+            background: var(--black);
+        }
+        
+        .your-id-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--yellow);
+            margin-bottom: 10px;
+        }
+        
+        .your-id-display {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            background: var(--gray);
+            padding: 12px;
+            border: 2px solid var(--white);
+            word-break: break-all;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+        
+        .your-id-display:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+        
+        .your-id-display::after {
+            content: 'CLICK TO COPY';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.6rem;
+            opacity: 0.5;
+        }
+        
+        /* QR CODE SECTION */
+        .qr-section {
+            padding: 20px;
+            border-bottom: 2px solid var(--white);
+            text-align: center;
+        }
+        
+        .qr-container {
+            background: var(--white);
+            padding: 15px;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .qr-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--green);
+            animation: scan 2s linear infinite;
+        }
+        
+        #qrcode {
+            display: block;
+        }
+        
+        .qr-label {
+            font-size: 0.7rem;
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        /* CONNECT SECTION */
+        .connect-section {
+            padding: 20px;
+            border-bottom: 2px solid var(--white);
+        }
+        
+        .connect-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            color: var(--green);
+        }
+        
+        .connect-input-group {
+            display: flex;
+            gap: 0;
+        }
+        
+        .connect-input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid var(--white);
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            outline: none;
+        }
+        
+        .connect-input:focus {
+            background: var(--gray);
+        }
+        
+        .connect-btn {
+            padding: 15px 25px;
+            background: var(--white);
+            color: var(--black);
+            border: 2px solid var(--white);
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+        
+        .connect-btn:hover {
+            background: var(--green);
+            border-color: var(--green);
+        }
+        
+        /* PEERS LIST */
+        .peers-section {
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .peers-header {
+            padding: 15px 20px;
+            border-bottom: 2px solid var(--white);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: var(--gray);
+            position: sticky;
+            top: 0;
+        }
+        
+        .peer-item {
+            padding: 20px;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+            transition: all 0.1s;
+            position: relative;
+        }
+        
+        .peer-item:hover {
+            background: var(--gray);
+            padding-left: 30px;
+        }
+        
+        .peer-item.active {
+            background: var(--white);
+            color: var(--black);
+        }
+        
+        .peer-item.active::before {
+            content: '►';
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .peer-name {
+            font-weight: 700;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .peer-status {
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            display: inline-block;
+        }
+        
+        .peer-id {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            word-break: break-all;
+        }
+        
+        .peer-last-msg {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .peer-unread {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--red);
+            color: var(--white);
+            padding: 3px 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        
+        /* CHAT AREA */
+        .chat-area {
+            display: flex;
+            flex-direction: column;
+            background: var(--dark-gray);
+        }
+        
+        .chat-header {
+            padding: 20px;
+            border-bottom: 2px solid var(--white);
+            background: var(--gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-peer-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .chat-peer-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--white);
+            color: var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+        
+        .chat-peer-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .chat-peer-status {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .chat-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-action-btn {
+            width: 45px;
+            height: 45px;
+            background: var(--black);
+            border: 2px solid var(--white);
+            color: var(--white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.1s;
+        }
+        
+        .chat-action-btn:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+        
+        /* MESSAGES */
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .message {
+            max-width: 70%;
+            position: relative;
+        }
+        
+        .message.sent {
+            align-self: flex-end;
+        }
+        
+        .message.received {
+            align-self: flex-start;
+        }
+        
+        .message-content {
+            padding: 15px 20px;
+            position: relative;
+        }
+        
+        .message.sent .message-content {
+            background: var(--white);
+            color: var(--black);
+        }
+        
+        .message.received .message-content {
+            background: var(--gray);
+            border: 2px solid var(--white);
+        }
+        
+        .message-text {
+            word-break: break-word;
+            line-height: 1.5;
+        }
+        
+        .message-meta {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            font-size: 0.7rem;
+            opacity: 0.6;
+        }
+        
+        .message-status {
+            font-size: 0.8rem;
+        }
+        
+        .message-status.sent::after { content: '✓'; }
+        .message-status.delivered::after { content: '✓✓'; }
+        .message-status.read::after { content: '✓✓'; color: var(--blue); }
+        
+        .message-image {
+            max-width: 100%;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .message-file {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        .message-file:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .typing-indicator {
+            align-self: flex-start;
+            padding: 15px 20px;
+            background: var(--gray);
+            border: 2px solid var(--white);
+            display: none;
+        }
+        
+        .typing-indicator.active {
+            display: block;
+        }
+        
+        .typing-dots {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: var(--white);
+            animation: typingBounce 1.4s infinite;
+        }
+        
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typingBounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+        
+        /* DATE SEPARATOR */
+        .date-separator {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.5;
+        }
+        
+        .date-separator span {
+            background: var(--dark-gray);
+            padding: 0 20px;
+        }
+        
+        /* INPUT AREA */
+        .input-area {
+            padding: 20px;
+            border-top: 2px solid var(--white);
+            background: var(--black);
+        }
+        
+        .input-container {
+            display: flex;
+            gap: 0;
+        }
+        
+        .input-actions {
+            display: flex;
+        }
+        
+        .input-action-btn {
+            width: 55px;
+            height: 55px;
+            background: var(--gray);
+            border: 2px solid var(--white);
+            border-right: none;
+            color: var(--white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: all 0.1s;
+        }
+        
+        .input-action-btn:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+        
+        .message-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid var(--white);
+            border-right: none;
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            outline: none;
+            resize: none;
+            min-height: 55px;
+            max-height: 150px;
+        }
+        
+        .message-input:focus {
+            background: var(--gray);
+        }
+        
+        .send-btn {
+            width: 80px;
+            background: var(--white);
+            color: var(--black);
+            border: 2px solid var(--white);
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+        
+        .send-btn:hover {
+            background: var(--green);
+            border-color: var(--green);
+        }
+        
+        /* WELCOME SCREEN */
+        .welcome-screen {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .welcome-logo {
+            font-family: 'Inter', sans-serif;
+            font-size: 6rem;
+            font-weight: 900;
+            letter-spacing: -8px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .welcome-logo::before {
+            content: 'CUNQ';
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            color: var(--red);
+            z-index: -1;
+        }
+        
+        .welcome-logo::after {
+            content: 'CUNQ';
+            position: absolute;
+            left: -5px;
+            top: -5px;
+            color: var(--blue);
+            z-index: -1;
+        }
+        
+        .welcome-tagline {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 50px;
+            opacity: 0.8;
+        }
+        
+        .welcome-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 800px;
+        }
+        
+        .feature-box {
+            padding: 30px;
+            border: 2px solid var(--white);
+            text-align: left;
+            transition: all 0.1s;
+        }
+        
+        .feature-box:hover {
+            background: var(--white);
+            color: var(--black);
+            transform: translate(-5px, -5px);
+            box-shadow: 5px 5px 0 var(--white);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-title {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        
+        .feature-desc {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        .welcome-instructions {
+            margin-top: 50px;
+            padding: 30px;
+            border: 2px dashed var(--yellow);
+            max-width: 600px;
+        }
+        
+        .instruction-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+            text
