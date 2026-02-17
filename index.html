@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cunq.com">
+    <meta property="og:title" content="CUNQ | Movement Direction & Choreography">
+    <meta property="og:description" content="International agency for movement direction, translating creative visions into physical storytelling.">
+    <meta property="og:image" content="https://cunq.com">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://cunq.com">
+    <meta property="twitter:title" content="CUNQ | Movement Direction & Choreography">
+    <meta property="twitter:description" content="International agency for movement direction, translating creative visions into physical storytelling.">
+    <meta property="twitter:image" content="https://cunq.com">
+
     <title>CUNQ</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><text x='16' y='15' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-weight='900' font-size='15' fill='%23fff'>CU</text><text x='16' y='30' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-weight='900' font-size='15' fill='%23fff'>NQ</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
@@ -33,6 +45,11 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--text);
+            color: var(--bg);
         }
 
         /* Navigation */
@@ -284,47 +301,40 @@
             background: var(--bg-secondary);
         }
 
-        /* ----- UPDATED WORK CSS START ----- */
         .work-grid {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
         }
 
+        /* --- UPDATED CSS START --- */
         .work-item {
             position: relative;
-            /* Basisbreite: ca 50% minus die Lücke, damit 2 nebeneinander passen */
-            flex: 1 1 calc(50% - 1rem); 
-            height: 60vh; /* Fixe Höhe für einen cineastischen Look */
+            aspect-ratio: 16/10;
             background: var(--bg);
-            overflow: hidden;
+            /* WICHTIG: Overflow hidden sorgt dafür, dass das vergrößerte Bild nicht über den Rand ragt */
+            overflow: hidden; 
             cursor: pointer;
-            /* Smooth transition für die Breite */
-            transition: flex 0.8s cubic-bezier(0.25, 1, 0.5, 1), width 0.8s ease;
-        }
-
-        /* Wenn man hovert, nimmt das Item 100% der Breite ein */
-        .work-item:hover {
-            flex: 1 1 100%;
         }
 
         .work-img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Bild füllt den Kasten immer aus */
+            object-fit: cover;
             position: absolute;
             top: 0;
             left: 0;
+            /* Längere Transition (0.8s) und cubic-bezier für einen eleganten Effekt */
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s ease;
             filter: grayscale(20%);
-            /* Das Bild selbst zoomt noch leicht rein für mehr Dynamik */
-            transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s ease;
         }
 
         .work-item:hover .work-img {
-            transform: scale(1.05); /* Leichter Zoom innerhalb des Vollformats */
+            /* Scale erhöht von 1.05 auf 1.15 für deutliche Expansion */
+            transform: scale(1.15);
             filter: grayscale(0%);
         }
-        /* ----- UPDATED WORK CSS END ----- */
+        /* --- UPDATED CSS END --- */
 
         .work-item-inner {
             position: absolute;
@@ -332,11 +342,12 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 3rem;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 80%);
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
             opacity: 0;
-            transition: opacity 0.5s ease 0.1s; /* Slight delay on text appear */
+            transition: opacity 0.4s ease;
             z-index: 2;
+            pointer-events: none; /* Verhindert flackern, wenn man über Text hovert */
         }
 
         .work-item:hover .work-item-inner {
@@ -353,7 +364,7 @@
 
         .work-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
 
         /* Contact */
@@ -536,10 +547,8 @@
                 text-align: left;
             }
 
-            /* Auf Tablet/Mobile nehmen die Items immer 100% ein */
-            .work-item {
-                flex: 1 1 100%;
-                height: 50vh;
+            .work-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -705,7 +714,7 @@
                 <img src="bild_2.jpeg" alt="Work 2" class="work-img">
                 <div class="work-item-inner">
                     <span class="work-client">Erik Gross</span>
-                    <h4 class="work-title">Movement development</h4>
+                    <h4 class="work-title">"Movement development"</h4>
                 </div>
             </div>
             <div class="work-item">
