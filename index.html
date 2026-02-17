@@ -301,6 +301,23 @@
             cursor: pointer;
         }
 
+        /* NEUE CSS KLASSE FÜR BILDER */
+        .work-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.6s ease;
+            filter: grayscale(20%); /* Optional: leichter Graufilter für edlen Look */
+        }
+
+        .work-item:hover .work-img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
         .work-item-inner {
             position: absolute;
             inset: 0;
@@ -311,28 +328,11 @@
             background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
             opacity: 0;
             transition: opacity 0.4s ease;
+            z-index: 2; /* Text über dem Bild */
         }
 
         .work-item:hover .work-item-inner {
             opacity: 1;
-        }
-
-        .work-item-bg {
-            position: absolute;
-            inset: 0;
-            background: var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 4rem;
-            font-weight: 600;
-            color: var(--bg);
-            transition: transform 0.6s ease;
-        }
-
-        .work-item:hover .work-item-bg {
-            transform: scale(1.05);
         }
 
         .work-client {
@@ -671,38 +671,43 @@
         </div>
     </section>
 
+    <!-- HIER WURDEN DIE BILDER EINGEFÜGT -->
     <section class="work" id="work">
         <div class="section-header">
             <span class="section-label">Selected Work</span>
             <h2 class="section-title">Recent collaborations and productions.</h2>
         </div>
         <div class="work-grid">
+            <!-- BILD 1 -->
             <div class="work-item">
-                <div class="work-item-bg">01</div>
+                <img src="bild_1.png" alt="Work 1" class="work-img">
                 <div class="work-item-inner">
-                    <span class="work-client"></span>
-                    <h4 class="work-title"></h4>
+                    <span class="work-client">Vogue / Editorial</span>
+                    <h4 class="work-title">Silent Motion</h4>
                 </div>
             </div>
+            <!-- BILD 2 -->
             <div class="work-item">
-                <div class="work-item-bg">02</div>
+                <img src="bild_2.png" alt="Work 2" class="work-img">
                 <div class="work-item-inner">
-                    <span class="work-client"></span>
-                    <h4 class="work-title"></h4>
+                    <span class="work-client">Nike / Campaign</span>
+                    <h4 class="work-title">Run Forever</h4>
                 </div>
             </div>
+            <!-- BILD 3 -->
             <div class="work-item">
-                <div class="work-item-bg">03</div>
+                <img src="bild_3.png" alt="Work 3" class="work-img">
                 <div class="work-item-inner">
-                    <span class="work-client"></span>
-                    <h4 class="work-title"></h4>
+                    <span class="work-client">Sony Music</span>
+                    <h4 class="work-title">Echoes Video</h4>
                 </div>
             </div>
+            <!-- BILD 4 -->
             <div class="work-item">
-                <div class="work-item-bg">04</div>
+                <img src="bild_4.png" alt="Work 4" class="work-img">
                 <div class="work-item-inner">
-                    <span class="work-client"></span>
-                    <h4 class="work-title"></h4>
+                    <span class="work-client">Berlin Fashion Week</span>
+                    <h4 class="work-title">Opening Ceremony</h4>
                 </div>
             </div>
         </div>
