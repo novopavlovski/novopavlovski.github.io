@@ -307,12 +307,10 @@
             gap: 2rem;
         }
 
-        /* --- UPDATED CSS START --- */
         .work-item {
             position: relative;
             aspect-ratio: 16/10;
             background: var(--bg);
-            /* WICHTIG: Overflow hidden sorgt dafür, dass das vergrößerte Bild nicht über den Rand ragt */
             overflow: hidden; 
             cursor: pointer;
         }
@@ -324,17 +322,14 @@
             position: absolute;
             top: 0;
             left: 0;
-            /* Längere Transition (0.8s) und cubic-bezier für einen eleganten Effekt */
             transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s ease;
             filter: grayscale(20%);
         }
 
         .work-item:hover .work-img {
-            /* Scale erhöht von 1.05 auf 1.15 für deutliche Expansion */
             transform: scale(1.15);
             filter: grayscale(0%);
         }
-        /* --- UPDATED CSS END --- */
 
         .work-item-inner {
             position: absolute;
@@ -347,7 +342,7 @@
             opacity: 0;
             transition: opacity 0.4s ease;
             z-index: 2;
-            pointer-events: none; /* Verhindert flackern, wenn man über Text hovert */
+            pointer-events: none;
         }
 
         .work-item:hover .work-item-inner {
@@ -697,7 +692,8 @@
         </div>
         <div class="work-grid">
             <div class="work-item">
-                <img src="bild_3.jpeg" alt="Work 3" class="work-img">
+                <!-- HIER WURDE DIE ÄNDERUNG VORGENOMMEN (style="object-position: top;") -->
+                <img src="bild_3.jpeg" alt="Work 3" class="work-img" style="object-position: top;">
                 <div class="work-item-inner">
                     <span class="work-client"></span>
                     <h4 class="work-title">Christian Novopavlovski</h4>
